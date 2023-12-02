@@ -1,6 +1,6 @@
-import { h, Component } from 'preact';
+import { h, Component, render } from 'preact';
 
-export class MyCustomCard extends Component {
+export class MyCustomCard extends Component<{config: any}> {
   render() {
     return (
       <div>
@@ -10,3 +10,24 @@ export class MyCustomCard extends Component {
     );
   }
 }
+
+class MyCustomCardElement extends HTMLElement {
+  private _config: any
+
+  setConfig(config: any) {
+    this._config = config;
+    this.renderCard();
+  }
+
+  renderCard() {
+    if (this._config) {
+      render(<MyCustomCard config={this._config} />, this);
+    }
+  }
+
+  connectedCallback() {
+    this.renderCard()
+  }
+}
+
+customElements.define('my-custom-card', MyCustomCardElement);
