@@ -1,0 +1,20 @@
+:root {
+  --paper-font-body1_-_font-family: 'Roboto', 'Noto', sans-serif;
+  --primary-background-color: #212121; /* Home Assistant's default background color */
+  --primary-text-color: #fafafa; /* Home Assistant's default text color */
+}
+
+body {
+  margin: 0;
+  font-family: var(--paper-font-body1_-_font-family);
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color);
+  margin: 8px;
+}
+
+#root {
+  display: block;
+  margin: 0 auto;
+}
+
+/* You can add additional global styles or resets here */

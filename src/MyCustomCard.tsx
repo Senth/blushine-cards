@@ -6,6 +6,7 @@ export class MyCustomCard extends Component<{config: any}> {
       <div>
         <h1>Custom Home Assistant Card</h1>
         <p>This is a simple custom card for Home Assistant.</p>
+        <div style="width: 50px; height: 50px; background-color: red;"></div>
       </div>
     );
   }
