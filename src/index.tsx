@@ -1,4 +1,8 @@
 import { h, render } from 'preact'
+import { setup } from 'goober'
+
+setup(h)
+
 import { RoomCardComponent } from '@cards/RoomCard'
 import './index.css'
 

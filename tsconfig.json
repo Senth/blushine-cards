@@ -11,14 +11,13 @@
     "jsx": "react",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "plugins": [
-      {"name": "typescript-plugin-css-modules"}
-    ],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "baseUrl": "./",
     "paths": {
       "@cards/*": ["src/cards/*"],
+      "@components/*": ["src/components/*"],
       "@/*": ["src/*"]
-    },
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
