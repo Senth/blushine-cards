@@ -1,6 +1,6 @@
 :root {
   --paper-font-body1_-_font-family: 'Roboto', 'Noto', sans-serif;
-  --primary-background-color: #212121; /* Home Assistant's default background color */
+  --primary-background-color: rgb(16,30,36); /* Home Assistant's default background color */
   --primary-text-color: #fafafa; /* Home Assistant's default text color */
 }
 

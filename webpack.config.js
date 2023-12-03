@@ -17,11 +17,14 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-        // exclude: /node_modules/
       }
     ]
   },
   resolve: {
+    alias: {
+      '@cards': path.resolve(__dirname, 'src/cards/'),
+      '@': path.resolve(__dirname, 'src/')
+    },
     extensions: ['.tsx', '.ts', '.js']
   },
   plugins: [

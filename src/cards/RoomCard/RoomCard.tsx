@@ -1,6 +1,6 @@
 import { h, Component, render } from 'preact';
 
-export class MyCustomCard extends Component<{config: any}> {
+export default class RoomCardComponent extends Component<{config: any}> {
   render() {
     return (
       <div>
@@ -12,7 +12,7 @@ export class MyCustomCard extends Component<{config: any}> {
   }
 }
 
-class MyCustomCardElement extends HTMLElement {
+class RoomCardElement extends HTMLElement {
   private _config: any
 
   setConfig(config: any) {
@@ -22,7 +22,7 @@ class MyCustomCardElement extends HTMLElement {
 
   renderCard() {
     if (this._config) {
-      render(<MyCustomCard config={this._config} />, this);
+      render(<RoomCardComponent config={this._config} />, this);
     }
   }
 
@@ -31,4 +31,4 @@ class MyCustomCardElement extends HTMLElement {
   }
 }
 
-customElements.define('my-custom-card', MyCustomCardElement);
+customElements.define('blushine-room-card', RoomCardElement);
