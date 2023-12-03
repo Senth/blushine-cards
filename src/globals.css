@@ -1,0 +1,10 @@
+:root {
+  /* Margins */
+  --blushine-margin: 16px;
+  --blushine-margin-half: calc(var(--blushine-margin) * 0.5);
+  --blushine-margin-quarter: calc(var(--blushine-margin) * 0.25);
+
+  /* Card Settings */
+  --blushine-card-background-color: rgba(100, 100, 254, 0.1);
+  --blushine-card-border-radius: 8px;
+}

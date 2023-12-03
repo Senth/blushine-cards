@@ -1,9 +1,9 @@
-interface Temperature {
+export interface Temperature {
   entity: string
   showMinMax?: boolean
 }
 
-interface Light {
+export interface Light {
   entity: string
   icon: string
 }

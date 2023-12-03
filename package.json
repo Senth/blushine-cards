@@ -32,6 +32,13 @@
   },
   "dependencies": {
     "goober": "2.1.13",
-    "preact": "10.19.2"
+    "hass": "^1.0.9",
+    "preact": "10.19.2",
+    "zustand": "^4.4.7"
+  },
+  "overrides": {
+    "zustand": {
+      "react": "npm:preact^10.19.2"
+    }
   }
 }

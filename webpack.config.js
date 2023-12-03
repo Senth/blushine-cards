@@ -24,6 +24,7 @@ module.exports = {
     alias: {
       '@cards': path.resolve(__dirname, 'src/cards/'),
       '@components': path.resolve(__dirname, 'src/components/'),
+      '@hooks': path.resolve(__dirname, 'src/hooks/'),
       '@': path.resolve(__dirname, 'src/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
