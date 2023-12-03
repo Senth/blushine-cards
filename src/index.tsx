@@ -4,8 +4,5 @@ import './index.css'
 
 const root = document.getElementById('root')
 if (root) {
-  render(
-       <RoomCardComponent config={{}} />,
-    root
-  );
+  render(<RoomCardComponent config={{ name: 'Room' }} />, root)
 }
