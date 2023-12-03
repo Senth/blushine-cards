@@ -1,6 +1,7 @@
-import { h, render, JSX } from 'preact'
+import { h, JSX } from 'preact'
 import RoomConfig from './RoomConfig'
-import { extractCss, setup, styled } from 'goober'
+import { styled } from 'goober'
+import CardElement from '@cards/CardElement'
 
 export default function RoomCardComponent({
   config,
@@ -17,46 +18,12 @@ export default function RoomCardComponent({
 }
 
 const Card = styled('div')`
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--card-background-color-off);
 `
 
-class RoomCardElement extends HTMLElement {
-  private _config: RoomConfig
-
-  constructor() {
-    super()
-    this._config = {
-      name: 'Room',
-    }
-  }
-
-  setConfig(config: any) {
-    this._config = config
-    this.renderCard()
-  }
-
-  updateStyle() {
-    const shRoot = this.shadowRoot
-    if (!shRoot) return
-
-    const existingStyle = shRoot.querySelector('style')
-    if (existingStyle) return
-
-    const styleTag = document.createElement('style')
-    styleTag.textContent = extractCss()
-    shRoot.appendChild(styleTag)
-  }
-
-  renderCard() {
-    if (this._config && this.shadowRoot) {
-      render(<RoomCardComponent config={this._config} />, this.shadowRoot)
-      this.updateStyle()
-    }
-  }
-
-  connectedCallback() {
-    this.attachShadow({ mode: 'open' })
-    this.renderCard()
+class RoomCardElement extends CardElement<RoomConfig> {
+  getComponent(): JSX.Element {
+    return <RoomCardComponent config={this._config} />
   }
 }
 
