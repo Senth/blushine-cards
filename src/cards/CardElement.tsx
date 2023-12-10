@@ -1,12 +1,11 @@
 import { h, render, JSX } from 'preact'
 import { extractCss } from 'goober'
-import { globalStore } from '@/store'
 
 export default class CardElement<TConf> extends HTMLElement {
   protected _config: TConf
 
   set hass(hass: any) {
-    globalStore.setState({ hass })
+    // TODO set hass
     this.renderCard()
   }
 
