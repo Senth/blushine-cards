@@ -1,5 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const dotenv = require('dotenv')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -24,6 +26,7 @@ module.exports = {
     alias: {
       '@cards': path.resolve(__dirname, 'src/cards/'),
       '@components': path.resolve(__dirname, 'src/components/'),
+      '@ha': path.resolve(__dirname, 'src/ha'),
       '@hooks': path.resolve(__dirname, 'src/hooks/'),
       '@': path.resolve(__dirname, 'src/'),
     },
@@ -33,10 +36,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(dotenv.config().parsed),
+    }),
   ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
+    },
+    proxy: {
+      '/api': {
+        target: dotenv.config().parsed.HASS_URL,
+        secure: false,
+        changeOrigin: true,
+      },
     },
   },
 }

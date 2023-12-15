@@ -16,6 +16,7 @@
     "paths": {
       "@cards/*": ["src/cards/*"],
       "@components/*": ["src/components/*"],
+      "@ha": ["src/ha"],
       "@hooks/*": ["src/hooks/*"],
       "@/*": ["src/*"]
     }

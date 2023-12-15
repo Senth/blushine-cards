@@ -1,6 +1,13 @@
-import { globalStore } from '@/store'
-import { HomeAssistant } from 'custom-card-helpers'
+import { HassLocalWrapper } from '@/hass/HassLocalWrapper'
+import { HomeAssistant } from '@ha'
 
 export default function useHass(): HomeAssistant | undefined {
-  return globalStore((state) => state.hass)
+  if (process.env.NODE_ENV === 'development') {
+    const hass = HassLocalWrapper.getInstance().hass
+    console.log(hass)
+    return hass
+  }
+
+  // TODO get real hass instance
+  return undefined
 }

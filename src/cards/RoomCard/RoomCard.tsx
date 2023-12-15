@@ -3,15 +3,19 @@ import RoomConfig, { Temperature } from './RoomConfig'
 import { styled } from 'goober'
 import CardElement from '@cards/CardElement'
 import { H2 } from '@components/Headers'
+import useHass from '@hooks/useHass'
 
 export default function RoomCardComponent({
   config,
 }: {
   config: RoomConfig
 }): JSX.Element {
+  const hass = useHass()
+
   return (
     <Card>
       <H2>{config.name}</H2>
+      <p>{hass?.states['sensor.matteus_computer_plug_power']}</p>
       <TemperatureComponent config={config.temperature} />
     </Card>
   )
