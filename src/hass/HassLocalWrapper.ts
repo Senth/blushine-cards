@@ -4,24 +4,21 @@ import { HomeAssistant } from '@ha'
 import HassEmpty from './HassEmpty'
 import { HassEntities } from 'home-assistant-js-websocket'
 
-const baseUrl = process.env.HASS_URL || 'http://localhost:8123'
 const accessToken = process.env.HASS_TOKEN || ''
 
 export class HassLocalWrapper {
   private static instance: HassLocalWrapper
-  private baseUrl: string
   private accessToken: string
   public hass: HomeAssistant = new HassEmpty()
 
-  private constructor(baseUrl: string, accessToken: string) {
-    this.baseUrl = baseUrl
+  private constructor(accessToken: string) {
     this.accessToken = accessToken
     this.initialize()
   }
 
   public static getInstance(): HassLocalWrapper {
     if (!HassLocalWrapper.instance) {
-      HassLocalWrapper.instance = new HassLocalWrapper(baseUrl, accessToken)
+      HassLocalWrapper.instance = new HassLocalWrapper(accessToken)
     }
     return HassLocalWrapper.instance
   }
@@ -35,7 +32,7 @@ export class HassLocalWrapper {
   }
 
   private async fetchStates(): Promise<HassEntities> {
-    const response = await fetch(`${this.baseUrl}/api/states`, {
+    const response = await fetch(`/api/states`, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`,
       },
