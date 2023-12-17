@@ -1,13 +1,32 @@
-import { HassLocalWrapper } from '@/hass/HassLocalWrapper'
+import { HassLocalStateChange, HassLocalWrapper } from '@/hass/HassLocalWrapper'
 import { HomeAssistant } from '@ha'
+import { useEffect, useReducer, useState } from 'preact/hooks'
 
-export default function useHass(): HomeAssistant | undefined {
-  if (process.env.NODE_ENV === 'development') {
-    const hass = HassLocalWrapper.getInstance().hass
-    console.log(hass)
-    return hass
-  }
+export default function useHass(): HomeAssistant {
+  const [, forceRender] = useReducer((s) => s + 1, 0)
+  const [hass, setHass] = useState<HomeAssistant>(
+    HassLocalWrapper.getInstance().hass
+  )
 
-  // TODO get real hass instance
-  return undefined
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      const hassLocalWrapper = HassLocalWrapper.getInstance()
+      hassLocalWrapper.updateStates()
+
+      const stateChangeListener = (event: HassLocalStateChange) => {
+        console.log('HassLocalWrapper state change')
+        setHass(event.hass)
+        forceRender(1)
+      }
+
+      // Update hass state when it changes
+      hassLocalWrapper.addStateChangeListener(stateChangeListener)
+
+      return () => {
+        hassLocalWrapper.removeStateChangeListener(stateChangeListener)
+      }
+    }
+  }, [])
+
+  return hass
 }

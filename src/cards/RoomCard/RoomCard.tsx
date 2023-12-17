@@ -4,6 +4,7 @@ import { styled } from 'goober'
 import CardElement from '@cards/CardElement'
 import { H2 } from '@components/Headers'
 import useHass from '@hooks/useHass'
+import { HomeAssistant } from '@ha'
 
 export default function RoomCardComponent({
   config,
@@ -15,23 +16,27 @@ export default function RoomCardComponent({
   return (
     <Card>
       <H2>{config.name}</H2>
-      <p>{hass?.states['sensor.matteus_computer_plug_power']}</p>
-      <TemperatureComponent config={config.temperature} />
+      <TemperatureComponent hass={hass} config={config.temperature} />
     </Card>
   )
 }
 
 function TemperatureComponent({
   config,
+  hass,
 }: {
   config: Temperature | undefined
+  hass: HomeAssistant
 }): JSX.Element {
   if (!config || !config.entity) return <div></div>
 
-  // Get the temperature from Home Assistant?
-  const temperature = 0
+  const entity = hass.states[config.entity]
+  console.log(hass.states)
+  if (!entity) return <div>Invalid entity</div>
 
-  return <div></div>
+  const temperature = entity.state
+
+  return <div>Temperature: {temperature}</div>
 }
 
 const Card = styled('div')`
