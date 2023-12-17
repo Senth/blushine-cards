@@ -3,15 +3,17 @@ import RoomConfig, { Temperature } from './RoomConfig'
 import { styled } from 'goober'
 import CardElement from '@cards/CardElement'
 import { H2 } from '@components/Headers'
-import useHass from '@hooks/useHass'
 import { HomeAssistant } from '@ha'
 
 export default function RoomCardComponent({
   config,
+  hass,
 }: {
   config: RoomConfig
+  hass: HomeAssistant
 }): JSX.Element {
-  const hass = useHass()
+  console.log('Rendering room card')
+  if (!hass) return <div>Invalid hass</div>
 
   return (
     <Card>
@@ -47,8 +49,12 @@ const Card = styled('div')`
 
 // --- Home Assistant Element ---
 class RoomCardElement extends CardElement<RoomConfig> {
-  getComponent(): JSX.Element {
-    return <RoomCardComponent config={this._config} />
+  getComponent(config: RoomConfig, hass: HomeAssistant): JSX.Element {
+    return <RoomCardComponent hass={hass} config={config} />
+  }
+
+  getEntityList(config: RoomConfig): (string | undefined)[] {
+    return [config.temperature?.entity]
   }
 }
 

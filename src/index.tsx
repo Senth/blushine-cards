@@ -1,4 +1,4 @@
-import { h, render } from 'preact'
+import { JSX, h, render } from 'preact'
 import { styled, setup } from 'goober'
 
 setup(h)
@@ -6,6 +6,7 @@ setup(h)
 import { RoomCardComponent } from '@cards/RoomCard'
 import './index.css'
 import './globals.css'
+import useHass from '@hooks/useHass'
 
 const Stack = styled('div')`
   display: flex;
@@ -18,20 +19,25 @@ const Stack = styled('div')`
   }
 `
 
-const root = document.getElementById('root')
-if (root) {
-  const elements = (
+function Root(): JSX.Element {
+  const hass = useHass()
+
+  return (
     <Stack>
       <RoomCardComponent
+        hass={hass}
         config={{
           name: 'Room',
           temperature: { entity: 'sensor.balcony_temperature' },
         }}
       />
-      <RoomCardComponent config={{ name: 'Room' }} />
-      <RoomCardComponent config={{ name: 'Room' }} />
+      <RoomCardComponent hass={hass} config={{ name: 'Room' }} />
+      <RoomCardComponent hass={hass} config={{ name: 'Room' }} />
     </Stack>
   )
+}
 
-  render(elements, root)
+const root = document.getElementById('root')
+if (root) {
+  render(<Root />, root)
 }

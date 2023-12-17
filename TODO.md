@@ -5,7 +5,7 @@ A simple list of things to do, helps me keep track of what I'm doing.
 ## Next up
 
 - [ ] General stub development setup
-  - [ ] Make sure the entities (and useHass()) works as expected in HomeAssistant, not just in dev
+  - [x] Make sure the entities (and useHass()) works as expected in HomeAssistant, not just in dev
   - [ ] Ability to use Icons
 - [ ] Room Card
   - [ ] Background icon/image

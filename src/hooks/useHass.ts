@@ -14,7 +14,6 @@ export default function useHass(): HomeAssistant {
       hassLocalWrapper.updateStates()
 
       const stateChangeListener = (event: HassLocalStateChange) => {
-        console.log('HassLocalWrapper state change')
         setHass(event.hass)
         forceRender(1)
       }
