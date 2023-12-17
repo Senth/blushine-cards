@@ -36,7 +36,7 @@ function TemperatureComponent({
 
   const temperature = entity.state
 
-  return <div>Temperature: {temperature}</div>
+  return <div>Temperature: {temperature}℃</div>
 }
 
 const Card = styled('div')`
