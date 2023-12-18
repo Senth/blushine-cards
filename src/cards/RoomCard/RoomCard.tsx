@@ -4,6 +4,7 @@ import { styled } from 'goober'
 import CardElement from '@cards/CardElement'
 import { H2 } from '@components/Headers'
 import { HomeAssistant } from '@ha'
+import * as React from 'preact/compat'
 
 export default function RoomCardComponent({
   config,
@@ -38,7 +39,11 @@ function TemperatureComponent({
 
   const temperature = entity.state
 
-  return <div>Temperature: {temperature}℃</div>
+  return (
+    <div>
+      <ha-icon icon="mdi:thermometer"></ha-icon> {temperature}℃
+    </div>
+  )
 }
 
 const Card = styled('div')`

@@ -41,3 +41,8 @@ const root = document.getElementById('root')
 if (root) {
   render(<Root />, root)
 }
+
+// --- Setup Mocked Home Assistant HTML Elements ---
+if (process.env.NODE_ENV === 'development') {
+  import('./hass/components')
+}
